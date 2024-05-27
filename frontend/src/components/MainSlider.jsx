@@ -56,9 +56,7 @@ const MainSlider = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex(
-        (prevIndex) => (prevIndex + 1) % Math.ceil(slides.length / 2)
-      );
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
     }, 2000);
 
     return () => clearInterval(interval);
@@ -66,16 +64,12 @@ const MainSlider = () => {
 
   const handlePrev = () => {
     setCurrentIndex(
-      (prevIndex) =>
-        (prevIndex - 1 + Math.ceil(slides.length / 2)) %
-        Math.ceil(slides.length / 2)
+      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
     );
   };
 
   const handleNext = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex + 1) % Math.ceil(slides.length / 2)
-    );
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };
 
   return (
@@ -84,46 +78,35 @@ const MainSlider = () => {
         className="flex transition-transform duration-700"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {Array.from({ length: Math.ceil(slides.length / 2) }).map(
-          (_, index) => (
-            <div
-              key={index}
-              className="min-w-full flex justify-center items-center p-4 bg-white rounded-lg"
-            >
-              <div className="flex w-full space-x-4">
-                {slides.slice(index * 2, index * 2 + 2).map((slide, idx) => (
-                  <div
-                    key={idx}
-                    className="w-1/2 flex justify-center items-center p-4 bg-white rounded-lg shadow-lg"
-                  >
-                    <div className="w-full">
-                      <div className="flex flex-col items-center md:flex-row md:items-start">
-                        <div className="w-full md:w-1/4 p-4 flex justify-center">
-                          <img
-                            src={slide.image}
-                            alt="Slider Image"
-                            className="rounded-full w-24 h-24 md:w-32 md:h-32"
-                          />
-                        </div>
-                        <div className="w-full md:w-3/4 p-4">
-                          <h3 className="text-xl font-bold mb-2">
-                            {slide.name}
-                          </h3>
-                          <h4 className="text-md font-semibold mb-2">
-                            {slide.position}
-                          </h4>
-                          <p className="text-sm">{slide.feedback}</p>
-                        </div>
-                      </div>
-                    </div>
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className="min-w-full flex justify-center items-center p-4 bg-white rounded-lg"
+          >
+            <div className="w-full flex justify-center items-center p-4 bg-white rounded-lg shadow-lg">
+              <div className="w-full">
+                <div className="flex flex-col items-center md:flex-row md:items-start">
+                  <div className="w-full md:w-1/4 p-4 flex justify-center">
+                    <img
+                      src={slide.image}
+                      alt="Slider Image"
+                      className="rounded-full w-24 h-24 md:w-32 md:h-32"
+                    />
                   </div>
-                ))}
+                  <div className="w-full md:w-3/4 p-4">
+                    <h3 className="text-xl font-bold mb-2">{slide.name}</h3>
+                    <h4 className="text-md font-semibold mb-2">
+                      {slide.position}
+                    </h4>
+                    <p className="text-sm">{slide.feedback}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          )
-        )}
+          </div>
+        ))}
       </div>
-      <div className="relative bottom-0 left-0 right-0 flex justify-between items-center pb-4 px-4">
+      <div className="absolute bottom-0 left-0 right-0 flex justify-between items-center pb-4 px-4">
         <FaArrowLeft
           onClick={handlePrev}
           className="cursor-pointer text-blue-500"
@@ -133,9 +116,7 @@ const MainSlider = () => {
           <div
             className="h-full bg-blue-500 transition-all duration-700"
             style={{
-              width: `${
-                (currentIndex + 1) * (100 / Math.ceil(slides.length / 2))
-              }%`,
+              width: `${((currentIndex + 1) * 100) / slides.length}%`,
             }}
           ></div>
         </div>
