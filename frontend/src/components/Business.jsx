@@ -4,8 +4,8 @@ import Button from "./Button";
 const Business = () => {
   return (
     <section className="max-container flex flex-col gap-20 py-10 pb-32 md:gap-28 lg:py-10 xl:flex-row">
-      <div className="absolute z-20 flex flex-1 flex-col xl:w-1/2 p-10 text-white">
-        <h1 className="bold-52 text-5xl">
+      <div className="absolute z-20 flex flex-1 flex-col xl:w-1/2 lg:p-10 text-white p-5">
+        <h1 className="font-bold lg:text-5xl text-2xl">
           Unlock innovation and growth through talent transformation
         </h1>
         <p className="regular-16 mt-6 text-gray-30 xl:max-w-[520px]">
